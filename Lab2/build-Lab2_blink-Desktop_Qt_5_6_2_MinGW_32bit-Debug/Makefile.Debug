@@ -45,7 +45,7 @@ OBJECTS_DIR   = debug
 
 SOURCES       = ..\Lab2_blink\main.cpp \
 		..\Lab2_blink\bcm2835_stub.cpp \
-		..\Lab2_blink\pin.cpp 
+		pin.cpps 
 OBJECTS       = debug/main.o \
 		debug/bcm2835_stub.o \
 		debug/pin.o
@@ -53,7 +53,7 @@ OBJECTS       = debug/main.o \
 DIST          =  ..\Lab2_blink\bcm2835.h \
 		..\Lab2_blink\pin.h ..\Lab2_blink\main.cpp \
 		..\Lab2_blink\bcm2835_stub.cpp \
-		..\Lab2_blink\pin.cpp
+		pin.cpps
 QMAKE_TARGET  = Lab2_blink
 DESTDIR        = debug\ #avoid trailing-slash linebreak
 TARGET         = Lab2_blink.exe
@@ -173,8 +173,8 @@ debug/main.o: ../Lab2_blink/main.cpp C:/Qt/Qt5.6.2/5.6/mingw49_32/include/QtCore
 debug/bcm2835_stub.o: ../Lab2_blink/bcm2835_stub.cpp ../Lab2_blink/bcm2835.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\bcm2835_stub.o ..\Lab2_blink\bcm2835_stub.cpp
 
-debug/pin.o: ../Lab2_blink/pin.cpp ../Lab2_blink/pin.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\pin.o ..\Lab2_blink\pin.cpp
+debug/pin.o: pin.cpps 
+	$(CC) -c $(CFLAGS) $(INCPATH) -o debug\pin.o pin.cpps
 
 ####### Install
 

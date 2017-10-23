@@ -2,17 +2,21 @@
 #ifndef PIN_H
 #define PIN_H
 
+#define DIR_OUT 1
+#define DIR_IN  0
 
 class Pin
 {
     public:
         Pin(int number, char *direction, int state);
-        void set(Pin p);
-        int get(Pin p);
-        void change(Pin p);
+        void set();
+        int get();
+        void changeDirection();
+
+
     private:
         int number;
-        char *direction;
+        int direction;
         int state;
 
 };
