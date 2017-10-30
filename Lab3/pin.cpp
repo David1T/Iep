@@ -2,6 +2,7 @@
 #include "bcm2835.h"
 #include <iostream>
 #include <string>
+#include <stdio.h>
 
 
 using namespace std;
@@ -14,11 +15,11 @@ Pin::Pin(int number, int direction, int state)
 
     if(direction == DIR_IN)
     {
-        bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_INPT);
+        bcm2835_gpio_fsel(number, BCM2835_GPIO_FSEL_INPT);
     }
     else
     {
-        bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_OUTP);
+        bcm2835_gpio_fsel(number, BCM2835_GPIO_FSEL_OUTP);
     }
 }
 
@@ -26,11 +27,11 @@ Pin::Pin(int number, int direction, int state)
 void Pin::changeDirection(){
     if(this->direction==DIR_IN)
     {
-        bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_OUTP);
+        bcm2835_gpio_fsel(number, BCM2835_GPIO_FSEL_OUTP);
     }
     else
     {
-        bcm2835_gpio_fsel(PIN, BCM2835_GPIO_FSEL_INPT);
+        bcm2835_gpio_fsel(number, BCM2835_GPIO_FSEL_INPT);
     }
 
 
@@ -39,7 +40,7 @@ void Pin::changeDirection(){
 int Pin::get(){
    if(this->direction == DIR_IN)
    {
-       uint8_t value = bcm2835_gpio_lev(PIN);
+       uint8_t value = bcm2835_gpio_lev(number);
               printf("read from pin 15: %d\n", value);
 
               // wait a bit
@@ -51,16 +52,16 @@ int Pin::get(){
    }
 }
 
-void Pin::set(int state){
+void Pin::set(){
     if(this->direction == DIR_OUT)
     {
-                bcm2835_gpio_write(PIN, HIGH);
+                bcm2835_gpio_write(number, HIGH);
 
                // wait a bit
                bcm2835_delay(500);
 
                // turn it off
-               bcm2835_gpio_write(PIN, LOW);
+               bcm2835_gpio_write(number, LOW);
 
                // wait a bit
                bcm2835_delay(500);
